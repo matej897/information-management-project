@@ -1,0 +1,50 @@
+<mat-toolbar class="toolbar">
+  <span>BIKE RENTAL</span>
+  <button
+    [disabled]="!isAuthenticated()"
+    style="margin-left: 10px"
+    mat-raised-button
+    (click)="goToHome()"
+  >
+    Home
+  </button>
+  <button style="margin-left: 10px" mat-raised-button (click)="goToAuth()">
+    Auth
+  </button>
+  <span class="example-spacer"></span>
+  <div style="margin-left: auto; display: flex; align-items: center">
+    <button
+      style="margin-right: 10px"
+      mat-raised-button
+      [disabled]="isDataImported"
+      (click)="importData()"
+    >
+      Import Data
+    </button>
+    <div>
+      <mat-slide-toggle
+        [checked]="isMongoSelected"
+        [disabled]="!isDataImported || isMongoSelected"
+        (change)="switchToMongo()"
+        #dbToggle
+        labelPosition="before"
+        >PG</mat-slide-toggle
+      >
+      <label
+        style="font-size: 12px; vertical-align: middle; margin-left: 5px"
+        [attr.for]="dbToggle.inputId"
+        >MONGO</label
+      >
+    </div>
+  </div>
+</mat-toolbar>
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <p>Auto-resizing sidenav</p>
+  </mat-drawer>
+
+  <div class="main-container">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
